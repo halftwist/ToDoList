@@ -18,10 +18,11 @@ struct ToDoListView: View {
             List {
                 ForEach(toDos, id: \.self) { todo in
                     NavigationLink {
-                        DetailView(passedValue: todo)
+                        DetailView(toDo: todo)
                     } label: {
                         Text(todo)
                     }
+                    .font(.title2)
 
                    
                 }
