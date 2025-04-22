@@ -9,17 +9,23 @@ import SwiftUI
 
 struct ToDoListView: View {
     var body: some View {
+        var toDos = ["Learn Swift",
+                     "Build Apps",
+                     "Change the World",
+                     "Bring the Asesome",
+                     "Take a Vacation"]
         NavigationStack {
             List {
-                ForEach(0..<100, id: \.self) { number in
+                ForEach(toDos, id: \.self) { todo in
                     NavigationLink {
-                        DetailView(passedValue: "Item \(number)")
+                        DetailView(passedValue: todo)
                     } label: {
-                        Text("Item \(number)")
+                        Text(todo)
                     }
 
-                    
+                   
                 }
+                
 //                Section {
 //                    NavigationLink {
 //                        DetailView()
@@ -43,7 +49,7 @@ struct ToDoListView: View {
 //                }
                 
              }
-            .navigationTitle("School Year")
+            .navigationTitle("To Do List")
 //            .navigationBarTitleDisplayMode(.inline)
             .listStyle(.plain)
         }
