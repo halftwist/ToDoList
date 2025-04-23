@@ -49,7 +49,7 @@ struct DetailView: View {
 
         }
         .listStyle(.plain)
-        .navigationBarBackButtonHidden()
+        .navigationBarBackButtonHidden()  // hides the default back button
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 Button("Cancel") {
@@ -58,7 +58,7 @@ struct DetailView: View {
             }
             ToolbarItem(placement: .topBarTrailing) {
                 Button("Save") {
-                    //TOO: Add save code here
+                    //TODO: Add save code here
                 }
             }
 
