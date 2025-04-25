@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ToDoListView: View {
     var toDos = ["Learn Swift",
@@ -20,7 +21,7 @@ struct ToDoListView: View {
             List {
                 ForEach(toDos, id: \.self) { todo in
                     NavigationLink {
-                        DetailView(toDo: todo)
+//                        DetailView(toDo: ToDo())
                     } label: {
                         Text(todo)
                     }
@@ -60,7 +61,7 @@ struct ToDoListView: View {
 //            })
             .sheet(isPresented:$sheetIsPresented) {
                 NavigationStack {
-                    DetailView(toDo: "")
+                    DetailView(toDo: ToDo())
                 }
             }
             .toolbar {
@@ -85,4 +86,5 @@ struct ToDoListView: View {
 
 #Preview {
     ToDoListView()
+        .modelContainer(for: ToDo.self, inMemory: true)
 }
