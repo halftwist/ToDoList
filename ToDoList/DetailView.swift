@@ -76,7 +76,13 @@ struct DetailView: View {
                     toDo.dueDate = dueDate
                     toDo.notes = notes
                     toDo.isCompleted = isCompleted
-
+                    modelContext.insert(toDo)
+                    // debugging code
+                    guard let _ = try? modelContext.save() else {
+                        print("😡 ERROR: Save on DetailView did not work.")
+                        return
+                    }
+                    dismiss()
                 }
             }
 

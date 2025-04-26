@@ -16,4 +16,9 @@ struct ToDoListApp: App {
                 .modelContainer(for: ToDo.self)
         }
     }
+    
+    // will allow us to find where our simulator data is saved:
+    init() {
+        print(URL.applicationSupportDirectory.path(percentEncoded: false))
+    }
 }
