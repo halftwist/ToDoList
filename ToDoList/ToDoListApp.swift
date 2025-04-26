@@ -13,7 +13,7 @@ struct ToDoListApp: App {
     var body: some Scene {
         WindowGroup {
             ToDoListView()
-                .modelContainer(for: ToDo.self)
+                .modelContainer(for: ToDo.self)   // for:modelType The model type defining the schema used to create the model container.
         }
     }
     

@@ -14,47 +14,22 @@ struct ToDoListView: View {
 //                 "Change the World",
 //                 "Bring the Asesome",
 //                 "Take a Vacation"]
-    @Query var toDos: [ToDo]
+    @Query var toDos: [ToDo]  // Fetches all instances of the attached model type.
     @State private var sheetIsPresented = false
-    @Environment(\.modelContext) var modelContext
+    @Environment(\.modelContext) var modelContext  // The SwiftData model context that will be used for queries and other model operations within this environment.
 
-    
     var body: some View {
         NavigationStack {
-            List {
+            List {  // A container that presents rows of data arranged in a single column, optionally providing the ability to select one or more member
                 ForEach(toDos) { toDo in
                     NavigationLink {
-                        DetailView(toDo: toDo)
+                        DetailView(toDo: toDo)  // passes the selected row's SwiftData object to the destination view
                     } label: {
                         Text(toDo.item)
                     }
                     .font(.title2)
                     
-                    
                 }
-                
-                //                Section {
-                //                    NavigationLink {
-                //                        DetailView()
-                //                    } label: {
-                //                        Text("Winter")
-                //                    }
-                //                    Text("Summer")
-                //                } header: {
-                //                    Text("Breaks")
-                //                }
-                //
-                //                Section {
-                //                    NavigationLink {
-                //                        DetailView()
-                //                    } label: {
-                //                        Text("Spring")
-                //                    }
-                //                    Text("Fall")
-                //                } header: {
-                //                    Text("Semesters")
-                //                }
-                
             }
             .navigationTitle("To Do List")
             //            .navigationBarTitleDisplayMode(.inline)
@@ -63,7 +38,7 @@ struct ToDoListView: View {
 //                <#code#>
 //            })
             .sheet(isPresented:$sheetIsPresented) {
-                NavigationStack {
+                NavigationStack { //  A view that displays a root view and enables you to present additional views over the root view.
                     DetailView(toDo: ToDo())
                 }
             }

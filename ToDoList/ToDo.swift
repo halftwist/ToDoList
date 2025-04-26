@@ -8,6 +8,8 @@
 import Foundation
 import SwiftData
 
+//  Model() Converts a Swift class into a stored model that’s managed by SwiftData.
+//  Annotate your model classes with the @Model macro to make them persistable. At build time, the macro expands to provide conformance to the PersistentModel and Observable protocols.
 @Model
 class ToDo {
     var item: String = ""

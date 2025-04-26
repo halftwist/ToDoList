@@ -9,9 +9,8 @@ import SwiftUI
 import SwiftData
 
 struct DetailView: View {
-    @State var toDo: ToDo
+    @State var toDo: ToDo  // single Swift Data object
     @State private var item = ""
-    
     @State private var notes = ""
     @State private var isCompleted = false
     @State private var reminderIsOn = false
@@ -19,7 +18,9 @@ struct DetailView: View {
     @State private var dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Date.now)!
 //    var passedValue: String // Don't initialize it - it will be passed from the parent view
     // \.dismiss  An action that dismisses the current presentation.
+//   @Environment: A property wrapper that reads a value from a view’s environment.
     @Environment(\.dismiss) private var dismiss
+//  modelContext The SwiftData model context that will be used for queries and other model operations within this environment.
     @Environment(\.modelContext) var modelContext
     
     var body: some View {
@@ -78,11 +79,12 @@ struct DetailView: View {
                     toDo.isCompleted = isCompleted
                     modelContext.insert(toDo)
                     // debugging code
+//  save() Writes any pending inserts, changes, and deletes to the persistent storage.
                     guard let _ = try? modelContext.save() else {
                         print("😡 ERROR: Save on DetailView did not work.")
                         return
                     }
-                    dismiss()
+                    dismiss()  // dismiss or close the current view
                 }
             }
 
@@ -93,7 +95,7 @@ struct DetailView: View {
 
 #Preview {
     NavigationStack {
-        DetailView(toDo: ToDo())
+        DetailView(toDo: ToDo())  // 
             .modelContainer(for: ToDo.self, inMemory: true)
     }
    
