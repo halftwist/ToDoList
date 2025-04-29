@@ -22,14 +22,43 @@ struct ToDoListView: View {
         NavigationStack {
             List {  // A container that presents rows of data arranged in a single column, optionally providing the ability to select one or more member
                 ForEach(toDos) { toDo in
-                    NavigationLink {
-                        DetailView(toDo: toDo)  // passes the selected row's SwiftData object to the destination view
-                    } label: {
-                        Text(toDo.item)
+                    HStack {
+                        Image(systemName: toDo.isCompleted ? "checkmark.rectangle" : "rectangle")
+                            .onTapGesture {
+                                toDo.isCompleted.toggle()
+                                guard let _ = try? modelContext.save() else {
+                                    print("😡 ERROR: Save after .isCompleted.toggle on ToDoListView did not work.")
+                                    return
+                                }
+                            }
+                        
+                        NavigationLink {
+                            DetailView(toDo: toDo)  // passes the selected row's SwiftData object to the destination view
+                        } label: {
+                            Text(toDo.item)
+                        }
+                       
+                        .swipeActions {
+                            Button("Delete", role: .destructive) {
+                                modelContext.delete(toDo)
+                                guard let _ = try? modelContext.save() else {
+                                    print("😡 ERROR: Save after .delete on ToDoListView did not work.")
+                                    return
+                                }
+                            }
+                        }
                     }
                     .font(.title2)
-                    
                 }
+                // Alternate old method for deletions
+//                .onDelete { indexSet in
+//                    indexSet.forEach({modelContext.delete(toDos[$0])})
+//                    guard let _ = try? modelContext.save() else {
+//                        print("😡 ERROR: Save after .delete on ToDoListView did not work.")
+//                        return
+//                    }
+//                 }
+                
             }
             .navigationTitle("To Do List")
             //            .navigationBarTitleDisplayMode(.inline)
